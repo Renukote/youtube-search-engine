@@ -334,4 +334,24 @@
             videos.append( div );
         })
     }
+
+    async function showPopular(){
+
+       let res = await fetch(`https://youtube.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&maxResults=30&key=AIzaSyDoGKxXkYfxrD0Pc5JfpyHQgTI3K4s-EKs`);
+       res = await res.json();
+
+       console.log( res );
+
+       videos.innerHTML = "<h2 style = 'color:white' > Most Popular </h2>"; query.value = "";
+        res.items.forEach(({ id }) => {
+
+            let div = document.createElement('div');
+            div.innerHTML = `<iframe width="734" height="413" src="https://www.youtube.com/embed/${id}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+            div.style.marginTop = '20px'; 
+            
+            videos.append( div );
+        })
+
+    } 
+    showPopular();
 </script>
